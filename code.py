@@ -18,11 +18,18 @@ data = pd.read_csv('adult.data', skiprows=1, names=[
 
 # Data preprocessing
 data = data.apply(lambda x: x.str.strip() if x.dtype == "object" else x)
+
+less_than_50k = data[data['income'] == '<=50K']
+more_than_50k = data[data['income'] == '>50K']
+less_than_50k = less_than_50k.sample(n=len(more_than_50k), random_state=42)
+data_2 = pd.concat([less_than_50k, more_than_50k])
+
+data_before_preprocessing = data_2.copy()
+
 data.replace('?', np.nan, inplace=True)
-data_before_preprocessing = data.copy()  # Copy the original data for visualization
 data = data.fillna(data.mode().iloc[0])
 data = pd.get_dummies(data, columns=['workclass','education', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'native-country'])
-data_after_preprocessing = data.copy()  # Copy the preprocessed data for visualization
+data_after_preprocessing = data_2.copy()  # Copy the preprocessed data for visualization
 
 less_than_50k = data[data['income'] == '<=50K']
 more_than_50k = data[data['income'] == '>50K']
