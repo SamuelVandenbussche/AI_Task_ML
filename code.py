@@ -52,13 +52,13 @@ st.bar_chart(income_counts)
 st.write("Bar chart of income levels")
 
 # Bar chart of income levels
-st.subheader("Distribution of Income Levels before undersampeling")
+st.subheader("Distribution of Income Levels after undersampeling")
 income_counts = data_2['income'].value_counts()
 st.bar_chart(income_counts)
 st.write("Bar chart of income levels")
 
 # Display the original data and preprocessed data
-st.subheader("Original Data")
+st.subheader("Original Data(after undersampeling)")
 st.write(data_before_preprocessing)
 
 # Display data preprocessing steps
@@ -70,7 +70,7 @@ st.write("Null values are filled with the mode (most frequent value) for each co
 st.write("2. One-Hot Encoding:")
 st.write("Categorical columns are one-hot encoded to convert them into numerical format.")
 
-st.subheader("Preprocessed Data")
+st.subheader("Preprocessed Data(after undersampeling)")
 st.write(data_after_preprocessing)
 
 # Model selection section
