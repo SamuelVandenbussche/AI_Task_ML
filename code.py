@@ -34,6 +34,10 @@ st.title("Machine Learning Model Comparison App")
 # EDA section
 st.header("Exploratory Data Analysis")
 
+# Display the original data and preprocessed data
+st.subheader("Original Data")
+st.write(data_before_preprocessing)
+
 # Display data preprocessing steps
 st.subheader("Data Preprocessing")
 
@@ -42,10 +46,6 @@ st.write("Null values are filled with the mode (most frequent value) for each co
 
 st.write("2. One-Hot Encoding:")
 st.write("Categorical columns are one-hot encoded to convert them into numerical format.")
-
-# Display the original data and preprocessed data
-st.subheader("Original Data")
-st.write(data_before_preprocessing)
 
 st.subheader("Preprocessed Data")
 st.write(data_after_preprocessing)
