@@ -24,9 +24,14 @@ data = data.fillna(data.mode().iloc[0])
 data = pd.get_dummies(data, columns=['workclass','education', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'native-country'])
 data_after_preprocessing = data.copy()  # Copy the preprocessed data for visualization
 
+less_than_50k = data[data['income'] == '<=50K']
+more_than_50k = data[data['income'] == '>50K']
+less_than_50k = less_than_50k.sample(n=len(more_than_50k), random_state=42)
+data_2 = pd.concat([less_than_50k, more_than_50k])
+
 # Split the data
-X = data.drop('income', axis=1)
-y = data['income']
+X = data_2.drop('income', axis=1)
+y = data_2['income']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Create Streamlit app
@@ -38,8 +43,14 @@ st.write("I have chosen the adult dataset, this dataset was made to try and pred
 st.header("Exploratory Data Analysis")
 
 # Bar chart of income levels
-st.subheader("Distribution of Income Levels")
+st.subheader("Distribution of Income Levels before undersampeling")
 income_counts = data['income'].value_counts()
+st.bar_chart(income_counts)
+st.write("Bar chart of income levels")
+
+# Bar chart of income levels
+st.subheader("Distribution of Income Levels before undersampeling")
+income_counts = data_2['income'].value_counts()
 st.bar_chart(income_counts)
 st.write("Bar chart of income levels")
 
