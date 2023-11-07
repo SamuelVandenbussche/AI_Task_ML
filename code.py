@@ -53,7 +53,7 @@ st.write(data_after_preprocessing)
 # Numerical feature histogram
 st.subheader("Numerical Feature Histograms")
 numerical_features = data.select_dtypes(include=[np.number]).columns
-selected_feature = st.selectbox("Select a numerical feature", numerical_features)
+selected_feature = st.selectbox("Select a numerical feature", numerical_features, key="histogram_select_feature")
 
 # Create a Matplotlib figure and axis
 fig, ax = plt.subplots()
@@ -64,7 +64,7 @@ st.write("Histogram of", selected_feature)
 
 # Box plots
 st.subheader("Box Plots of Numerical Features")
-selected_box_feature = st.selectbox("Select a numerical feature", numerical_features)
+selected_box_feature = st.selectbox("Select a numerical feature", numerical_features, key="box_select_feature")
 st.pyplot(sns.boxplot(x=data[selected_box_feature]))
 st.write("Box plot of", selected_box_feature)
 
@@ -77,8 +77,8 @@ st.write("Bar chart of", selected_cat_feature)
 
 # Scatter plots
 st.subheader("Scatter Plots")
-scatter_x = st.selectbox("Select a numerical feature for the x-axis", numerical_features)
-scatter_y = st.selectbox("Select a numerical feature for the y-axis", numerical_features)
+scatter_x = st.selectbox("Select a numerical feature for the x-axis", numerical_features, key="scatter_x")
+scatter_y = st.selectbox("Select a numerical feature for the y-axis", numerical_features, key="scatter_y")
 st.pyplot(plt.scatter(data[scatter_x], data[scatter_y]))
 st.write("Scatter plot of", scatter_x, "vs", scatter_y)
 
