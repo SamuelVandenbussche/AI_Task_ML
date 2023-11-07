@@ -54,7 +54,12 @@ st.write(data_after_preprocessing)
 st.subheader("Numerical Feature Histograms")
 numerical_features = data.select_dtypes(include=[np.number]).columns
 selected_feature = st.selectbox("Select a numerical feature", numerical_features)
-st.pyplot(plt.hist(data[selected_feature], bins=20))
+
+# Create a Matplotlib figure and axis
+fig, ax = plt.subplots()
+ax.hist(data[selected_feature], bins=20)
+st.pyplot(fig)  # Display the Matplotlib figure
+
 st.write("Histogram of", selected_feature)
 
 # Box plots
