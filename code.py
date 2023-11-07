@@ -65,8 +65,13 @@ st.write("Histogram of", selected_feature)
 # Box plots
 st.subheader("Box Plots of Numerical Features")
 selected_box_feature = st.selectbox("Select a numerical feature", numerical_features, key="box_select_feature")
-st.pyplot(sns.boxplot(x=data[selected_box_feature]))
+
+# Create a seaborn box plot
+fig, ax = plt.subplots()
+sns.boxplot(x=data[selected_box_feature], ax=ax)
+st.pyplot(fig)
 st.write("Box plot of", selected_box_feature)
+
 
 # Categorical feature bar chart
 st.subheader("Categorical Feature Bar Charts")
