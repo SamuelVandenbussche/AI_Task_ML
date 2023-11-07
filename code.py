@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import streamlit as st
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Load the data
 data = pd.read_csv('adult.data', skiprows=1, names=[
@@ -17,8 +18,10 @@ data = pd.read_csv('adult.data', skiprows=1, names=[
 # Data preprocessing
 data = data.apply(lambda x: x.str.strip() if x.dtype == "object" else x)
 data.replace('?', np.nan, inplace=True)
+data_before_preprocessing = data.copy()  # Copy the original data for visualization
 data = data.fillna(data.mode().iloc[0])
 data = pd.get_dummies(data, columns=['workclass','education', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'native-country'])
+data_after_preprocessing = data.copy()  # Copy the preprocessed data for visualization
 
 # Split the data
 X = data.drop('income', axis=1)
@@ -31,17 +34,55 @@ st.title("Machine Learning Model Comparison App")
 # EDA section
 st.header("Exploratory Data Analysis")
 
+# Display data preprocessing steps
+st.subheader("Data Preprocessing")
+
+st.write("1. Filling Null Values:")
+st.write("Null values are filled with the mode (most frequent value) for each column.")
+
+st.write("2. One-Hot Encoding:")
+st.write("Categorical columns are one-hot encoded to convert them into numerical format.")
+
+# Display the original data and preprocessed data
+st.subheader("Original Data")
+st.write(data_before_preprocessing)
+
+st.subheader("Preprocessed Data")
+st.write(data_after_preprocessing)
+
 # Numerical feature histogram
 st.subheader("Numerical Feature Histograms")
 numerical_features = data.select_dtypes(include=[np.number]).columns
 selected_feature = st.selectbox("Select a numerical feature", numerical_features)
-st.pyplot(st.pyplot(data[selected_feature].plot.hist(bins=20)))
+st.pyplot(plt.hist(data[selected_feature], bins=20))
+st.write("Histogram of", selected_feature)
+
+# Box plots
+st.subheader("Box Plots of Numerical Features")
+selected_box_feature = st.selectbox("Select a numerical feature", numerical_features)
+st.pyplot(sns.boxplot(x=data[selected_box_feature]))
+st.write("Box plot of", selected_box_feature)
 
 # Categorical feature bar chart
-st.subheader("Categorical Feature Bar Chart")
+st.subheader("Categorical Feature Bar Charts")
 categorical_features = data.select_dtypes(exclude=[np.number]).columns
 selected_cat_feature = st.selectbox("Select a categorical feature", categorical_features)
 st.bar_chart(data[selected_cat_feature].value_counts())
+st.write("Bar chart of", selected_cat_feature)
+
+# Scatter plots
+st.subheader("Scatter Plots")
+scatter_x = st.selectbox("Select a numerical feature for the x-axis", numerical_features)
+scatter_y = st.selectbox("Select a numerical feature for the y-axis", numerical_features)
+st.pyplot(plt.scatter(data[scatter_x], data[scatter_y]))
+st.write("Scatter plot of", scatter_x, "vs", scatter_y)
+
+# Correlation heatmap
+st.subheader("Correlation Heatmap")
+correlation_matrix = data.corr()
+sns.heatmap(correlation_matrix, annot=True)
+st.pyplot(plt)
+st.write("Correlation heatmap")
 
 # Model selection section
 st.header("Model Selection")
