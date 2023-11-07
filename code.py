@@ -31,6 +31,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Create Streamlit app
 st.title("Machine Learning Model Comparison App")
 
+st.write("I have chosen the adult dataset, this dataset was made to try and predict if a person has a yearly income that is above or below 50k dollars. It has attributes such as age, sex, nation of birth, education level and more.")
+
 # EDA section
 st.header("Exploratory Data Analysis")
 
