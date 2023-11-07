@@ -8,6 +8,7 @@ from sklearn.metrics import accuracy_score
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.metrics import confusion_matrix
 
 # Load the data
 data = pd.read_csv('adult.data', skiprows=1, names=[
@@ -75,4 +76,10 @@ y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 st.write(f"{selected_model} Model Accuracy: {accuracy:.2f}")
 
-st.write("Add more controls and visualizations for hyperparameter tuning and comparison here.")
+st.subheader("Confusion Matrix")
+conf_matrix = confusion_matrix(y_test, y_pred)
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+st.pyplot(plt)
+
