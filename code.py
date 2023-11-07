@@ -29,7 +29,18 @@ st.title("Machine Learning Model Comparison App")
 
 # EDA section
 st.header("Exploratory Data Analysis")
-st.write("Add EDA visualizations here.")
+
+# Numerical feature histogram
+st.subheader("Numerical Feature Histograms")
+numerical_features = data.select_dtypes(include=[np.number]).columns
+selected_feature = st.selectbox("Select a numerical feature", numerical_features)
+st.pyplot(st.pyplot(data[selected_feature].plot.hist(bins=20)))
+
+# Categorical feature bar chart
+st.subheader("Categorical Feature Bar Chart")
+categorical_features = data.select_dtypes(exclude=[np.number]).columns
+selected_cat_feature = st.selectbox("Select a categorical feature", categorical_features)
+st.bar_chart(data[selected_cat_feature].value_counts())
 
 # Model selection section
 st.header("Model Selection")
