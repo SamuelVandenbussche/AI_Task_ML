@@ -34,6 +34,12 @@ st.title("Machine Learning Model Comparison App")
 # EDA section
 st.header("Exploratory Data Analysis")
 
+# Bar chart of income levels
+st.subheader("Distribution of Income Levels")
+income_counts = data['income'].value_counts()
+st.bar_chart(income_counts)
+st.write("Bar chart of income levels")
+
 # Display the original data and preprocessed data
 st.subheader("Original Data")
 st.write(data_before_preprocessing)
