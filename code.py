@@ -50,50 +50,6 @@ st.write(data_before_preprocessing)
 st.subheader("Preprocessed Data")
 st.write(data_after_preprocessing)
 
-# Numerical feature histogram
-st.subheader("Numerical Feature Histograms")
-numerical_features = data.select_dtypes(include=[np.number]).columns
-selected_feature = st.selectbox("Select a numerical feature", numerical_features, key="histogram_select_feature")
-
-# Create a Matplotlib figure and axis
-fig, ax = plt.subplots()
-ax.hist(data[selected_feature], bins=20)
-st.pyplot(fig)  # Display the Matplotlib figure
-
-st.write("Histogram of", selected_feature)
-
-# Box plots
-st.subheader("Box Plots of Numerical Features")
-selected_box_feature = st.selectbox("Select a numerical feature", numerical_features, key="box_select_feature")
-
-# Create a seaborn box plot
-fig, ax = plt.subplots()
-sns.boxplot(x=data[selected_box_feature], ax=ax)
-st.pyplot(fig)
-st.write("Box plot of", selected_box_feature)
-
-
-# Categorical feature bar chart
-st.subheader("Categorical Feature Bar Charts")
-categorical_features = data.select_dtypes(exclude=[np.number]).columns
-selected_cat_feature = st.selectbox("Select a categorical feature", categorical_features)
-st.bar_chart(data[selected_cat_feature].value_counts())
-st.write("Bar chart of", selected_cat_feature)
-
-# Scatter plots
-st.subheader("Scatter Plots")
-scatter_x = st.selectbox("Select a numerical feature for the x-axis", numerical_features, key="scatter_x")
-scatter_y = st.selectbox("Select a numerical feature for the y-axis", numerical_features, key="scatter_y")
-st.pyplot(plt.scatter(data[scatter_x], data[scatter_y]))
-st.write("Scatter plot of", scatter_x, "vs", scatter_y)
-
-# Correlation heatmap
-st.subheader("Correlation Heatmap")
-correlation_matrix = data.corr()
-sns.heatmap(correlation_matrix, annot=True)
-st.pyplot(plt)
-st.write("Correlation heatmap")
-
 # Model selection section
 st.header("Model Selection")
 selected_model = st.selectbox("Select a machine learning model", ["Logistic Regression", "Random Forest", "SVM"])
