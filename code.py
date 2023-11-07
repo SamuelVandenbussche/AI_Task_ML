@@ -31,10 +31,6 @@ data_2 = data_2.fillna(data_2.mode().iloc[0])
 data_2 = pd.get_dummies(data_2, columns=['workclass','education', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'native-country'])
 data_after_preprocessing = data_2.copy()  # Copy the preprocessed data for visualization
 
-less_than_50k = data[data['income'] == '<=50K']
-more_than_50k = data[data['income'] == '>50K']
-less_than_50k = less_than_50k.sample(n=len(more_than_50k), random_state=42)
-data_2 = pd.concat([less_than_50k, more_than_50k])
 
 # Split the data
 X = data_2.drop('income', axis=1)
