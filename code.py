@@ -6,6 +6,7 @@ from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import streamlit as st
+import matplotlib.pyplot as plt
 
 # Load the data
 data = pd.read_csv('adult.data', skiprows=1, names=[
