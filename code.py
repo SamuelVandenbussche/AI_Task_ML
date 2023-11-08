@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
@@ -75,11 +75,11 @@ st.write(data_after_preprocessing.reset_index())
 
 # Model selection section
 st.header("Model Selection")
-selected_model = st.selectbox("Select a machine learning model", ["Logistic Regression", "Gradient Boosting", "SVM"])
+selected_model = st.selectbox("Select a machine learning model", ["Random Forest", "Gradient Boosting", "SVM"])
 
 # Train and evaluate the selected model
-if selected_model == "Logistic Regression":
-    model = LogisticRegression()
+if selected_model == "Random Forest":
+    model = RandomForestClassifier()
 elif selected_model == "Gradient Boosting":
     model = GradientBoostingClassifier()
 else:
