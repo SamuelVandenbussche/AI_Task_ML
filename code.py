@@ -59,7 +59,8 @@ st.write("Bar chart of income levels")
 
 # Display the original data and preprocessed data
 st.subheader("Original Data(after undersampeling)")
-st.write(data_before_preprocessing.reset_index())
+st.write("first 100 rows")
+st.write(data_before_preprocessing.reset_index().head(100))
 
 # Display data preprocessing steps
 st.subheader("Data Preprocessing")
@@ -71,7 +72,8 @@ st.write("2. One-Hot Encoding:")
 st.write("Categorical columns are one-hot encoded to convert them into numerical format.")
 
 st.subheader("Preprocessed Data(after undersampeling)")
-st.write(data_after_preprocessing.reset_index())
+st.write("first 100 rows")
+st.write(data_after_preprocessing.reset_index().head(100))
 
 # Model selection section
 st.header("Model Selection")
